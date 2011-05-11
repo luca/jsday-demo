@@ -1,0 +1,5 @@
+A very simple app I used on stage at jsconf.it/2011 to demo backbone.js 
+
+Disclaimer: it's a quick hack, so if you find any errors, style problems etc. Please correct me (so I can learn!).
+
+It uses some html and the css from the iphone example contained in the wonderful little Zepto.js library, see the full Zepto here: https://github.com/madrobby/zepto
