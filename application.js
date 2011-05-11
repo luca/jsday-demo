@@ -16,8 +16,6 @@ $(function(){
       	localStorage: new Store("Notes.store")
 	});
 	
-	window.notes = new Notes();
-	
 	var NoteView = Backbone.View.extend({
 
 	  tagName: "li",
@@ -39,8 +37,7 @@ $(function(){
 	  },
 	 
 	  edit: function(){
-		noteedit.showNote(this.model);
-	  	// alert(this.model.get("text"));
+		window.noteedit.showNote(this.model);
 	  }
 
 	});
@@ -55,14 +52,11 @@ $(function(){
 	  initialize: function() {
 	    _.bindAll(this, "addOne", "addAll", "create");
 	
-	    notes.bind('add',     this.addOne);
-	    notes.bind('refresh', this.addAll);
+	    window.notes.bind('add',     this.addOne);
+	    window.notes.bind('refresh', this.addAll);
 	    	
-	    notes.fetch();
-		if (window.notes.isEmpty()){
-			window.notes.create({});		
-		}
-	    
+	    window.notes.fetch();
+		    
 		this.el.addClass("current");
 	  },
 	
@@ -71,13 +65,12 @@ $(function(){
 	  	this.$(".list").append(view.render().el);
 	  },
 	  addAll: function(note){
-		notes.each(this.addOne);
+		window.notes.each(this.addOne);
 	  },
 	  create: function(){
-	  	noteedit.showNote(new Note({text:""}));
+	  	window.noteedit.showNote(new Note({text:""}));
 	  },
 	});
-	window.notepad = new NotepadView;
 
 	var NoteEditView = Backbone.View.extend({
 	
@@ -93,7 +86,7 @@ $(function(){
 	
 	  save: function(){
 		if (this.model.isNew()) {
-			notes.create({text:this.$("textarea").val()})
+			window.notes.create({text:this.$("textarea").val()})
 		} else {
 			this.model.save({text:this.$("textarea").val()});			
 		}
@@ -113,6 +106,12 @@ $(function(){
 	  },
 		
 	});
+
+	window.notes = new Notes;
+	window.notepad = new NotepadView;	
 	window.noteedit = new NoteEditView;
-	window.notes.refresh([])
+	if (window.notes.isEmpty()){
+		window.notes.create({});		
+	}
+	
 })
