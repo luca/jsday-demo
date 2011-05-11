@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest='cache.manifest'>
     <head>
       <title>JSDay > notes</title>
       <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
@@ -9,6 +9,29 @@
 	  <link rel="apple-touch-icon-precomposed" href="jsday_i.png">
     </head>
     <body>
+		<section id="menu">
+			<div class="toolbar">
+				<h1><img src="jsday_h.png"></h1>
+				<a href="#" id="add" class="button">+</a>
+			</div>
+			<ul class="list">
+				
+			</ul>
+		</section>
+		<section id="edit">
+			<div class="toolbar">
+				<a href="#menu" id="back" class="back">Back</a>
+				<h1>Edit note</h1>
+				<a href="#" id="save" class="button">Save</a>
+			</div>
+			<div class="form">
+				<textarea></textarea>				
+			</div>
+		</section>
+	
+		<script type="text/template" id="note-tmpl">
+			<span id="note-<%= id %>"><%= title %></span>
+		</script>
 
 		<script src="json2.js"></script>
 		<script src="underscore-1.1.6.js"></script>
@@ -16,6 +39,6 @@
 		<script src="backbone.js"></script>
 		<script src="backbone-localstorage.js"></script>
 		<script src="application.js"></script>
-		
+
     </body>
 </html>
